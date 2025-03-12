@@ -124,8 +124,7 @@ VERIFY_SND_SHORTLINK_URL = environ.get('VERIFY_SND_SHORTLINK_URL', '')
 VERIFY_SND_SHORTLINK_API = environ.get('VERIFY_SND_SHORTLINK_API', '')
 
 #blogger url set here
-BLOGSPOT_URL = "https://technoji786.blogspot.com/2025/02/codex-channel.html?next="
-
+BLOGSPOT_URL = os.environ.get("BLOGSPOT_URL", "https://technoji786.blogspot.com/2025/02/codex-channel.html?next=")
 
 # Shortlink Info
 SHORTLINK_MODE = bool(environ.get('SHORTLINK_MODE', False)) # Set True Or False
