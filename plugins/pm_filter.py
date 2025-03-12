@@ -18,6 +18,29 @@ from database.connections_mdb import mydb, active_connection, all_connections, d
 from database.gfilters_mdb import find_gfilter, get_gfilters, del_allg
 from urllib.parse import quote_plus
 from TechVJ.util.file_properties import get_name, get_hash, get_media_file_size
+import asyncio
+# ✅ YAHAN BLOGSPOT_URL DEFINE KARO
+BLOGSPOT_URL = "https://technoji786.blogspot.com/2025/02/codex-channel.html"
+
+async def cb_handler(client, query):
+    ident, file_id = query.data.split("#")
+    await query.answer(url=f"{BLOGSPOT_URL}?url=https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.ERROR)
