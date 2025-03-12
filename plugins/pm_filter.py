@@ -2702,22 +2702,28 @@ async def auto_filter(client, name, msg, reply_msg, ai_search, spoll=False):
             rating=imdb['rating'],
             url=imdb['url'],
             **locals()
-        )        
-        BLOGSPOT_URL = "https://technoji786.blogspot.com/2025/02/codex-channel.html"
-
+        )   
         temp.IMDB_CAP[message.from_user.id] = cap
         if not settings["button"]:
             cap += "<b>\n\n<u>🍿 Your Movie Files 👇</u></b>\n"
             for file in files:
-                cap += f"<b>\n📁 <a href='{BLOGSPOT_URL}?url=https://telegram.me/{temp.U_NAME}?start=files_{file.file_id}'>[{get_size(file.file_size)}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file.file_name.split()))}\n</a></b>"
+                clean_file_name = re.sub(r'[^\w\s.-]', '', file.file_name)
+        
+                # Encode Telegram Link
+                encoded_url = urllib.parse.quote(f"https://telegram.me/{temp.U_NAME}?start=files_{file.file_id}", safe='')
+
+                # Generate Final Caption
+                cap += f"<b>📁 <a href='{BLOGSPOT_URL}?url={encoded_url}'>[{get_size(file.file_size)}] {clean_file_name}</a></b>\n\n"
+
         else:
-            if settings["button"]:
-                cap = f"<b>Tʜᴇ Rᴇꜱᴜʟᴛꜱ Fᴏʀ ☞ {search}\n\nRᴇǫᴜᴇsᴛᴇᴅ Bʏ ☞ {message.from_user.mention}\n\nʀᴇsᴜʟᴛ sʜᴏᴡ ɪɴ ☞ {remaining_seconds} sᴇᴄᴏɴᴅs\n\nᴘᴏᴡᴇʀᴇᴅ ʙʏ ☞ : {message.chat.title} \n\n⚠️ ᴀꜰᴛᴇʀ 5 ᴍɪɴᴜᴛᴇꜱ ᴛʜɪꜱ ᴍᴇꜱꜱᴀɢᴇ ᴡɪʟʟ ʙᴇ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴅᴇʟᴇᴛᴇᴅ 🗑️\n\n</b>"
-            else:
-                cap = f"<b>Tʜᴇ Rᴇꜱᴜʟᴛꜱ Fᴏʀ ☞ {search}\n\nRᴇǫᴜᴇsᴛᴇᴅ Bʏ ☞ {message.from_user.mention}\n\nʀᴇsᴜʟᴛ sʜᴏᴡ ɪɴ ☞ {remaining_seconds} sᴇᴄᴏɴᴅs\n\nᴘᴏᴡᴇʀᴇᴅ ʙʏ ☞ : {message.chat.title} \n\n⚠️ ᴀꜰᴛᴇʀ 5 ᴍɪɴᴜᴛᴇꜱ ᴛʜɪꜱ ᴍᴇꜱꜱᴀɢᴇ ᴡɪʟʟ ʙᴇ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴅᴇʟᴇᴛᴇᴅ 🗑️\n\n</b>"
-                cap += "<b><u>🍿 Your Movie Files 👇</u></b>\n\n"
-                for file in files:
-                    cap += f"<b>📁 <a href='{BLOGSPOT_URL}?url=https://telegram.me/{temp.U_NAME}?start=files_{file.file_id}'>[{get_size(file.file_size)}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file.file_name.split()))}\n\n</a></b>"
+            cap = f"<b>Tʜᴇ Rᴇꜱᴜʟᴛꜱ Fᴏʀ ☞ {search}\n\nRᴇǫᴜᴇsᴛᴇᴅ Bʏ ☞ {message.from_user.mention}\n\nʀᴇsᴜʟᴛ sʜᴏᴡ ɪɴ ☞ {remaining_seconds} sᴇᴄᴏɴᴅs\n\nᴘᴏᴡᴇʀᴇᴅ ʙʏ ☞ : {message.chat.title} \n\n⚠️ ᴀꜰᴛᴇʀ 5 ᴍɪɴᴜᴛᴇꜱ ᴛʜɪꜱ ᴍᴇꜱꜱᴀɢᴇ ᴡɪʟʟ ʙᴇ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴅᴇʟᴇᴛᴇᴅ 🗑️\n\n</b>"
+
+            cap += "<b><u>🍿 Your Movie Files 👇</u></b>\n\n"
+            for file in files:
+                clean_file_name = re.sub(r'[^\w\s.-]', '', file.file_name)
+                encoded_url = urllib.parse.quote(f"https://telegram.me/{temp.U_NAME}?start=files_{file.file_id}", safe='')
+        
+                cap += f"<b>📁 <a href='{BLOGSPOT_URL}?url={encoded_url}'>[{get_size(file.file_size)}] {clean_file_name}</a></b>\n\n"
     
     if imdb and imdb.get('poster'):
         try:
