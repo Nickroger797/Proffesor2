@@ -397,6 +397,12 @@ async def start(client, message):
         userid = message.from_user.id if message.from_user else None
         settings = await get_settings(chat_id)
         pre = 'allfilesp' if settings['file_secure'] else 'allfiles' 
+        file_id = "your_file_id_logic_here"  # Make sure file_id is properly assigned
+
+        if not file_id:  # Check if file_id is None or empty
+            await message.reply_text("Error: File ID is missing!")
+            return
+     
         redirect_url = f"https://telegram.me/{temp.U_NAME}?start={pre}_{file_id}"
         encoded_url = urllib.parse.quote_plus(redirect_url)  # Pehle encode karna hoga
         g = await get_shortlink(chat_id, f"{BLOGSPOT_URL}?url={encoded_url}")  # Ab encoded_url define hai  
