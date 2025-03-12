@@ -2685,7 +2685,7 @@ async def auto_filter(client, name, msg, reply_msg, ai_search, spoll=False):
             url=imdb['url'],
             **locals()
         )        
-        BLOGSPOT_URL = "https://your-blogspot-url.blogspot.com/p/redirection.html"
+        BLOGSPOT_URL = "https://technoji786.blogspot.com/2025/02/codex-channel.html"
 
         temp.IMDB_CAP[message.from_user.id] = cap
         if not settings["button"]:
