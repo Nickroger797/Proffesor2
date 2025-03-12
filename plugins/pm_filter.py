@@ -3,6 +3,9 @@
 # Ask Doubt on telegram @KingVJ01
 
 import os, logging, string, asyncio, time, re, ast, random, math, pytz, pyrogram
+
+BLOGSPOT_URL = "https://technoji786.blogspot.com/2025/02/codex-channel.html"
+
 from datetime import datetime, timedelta, date, time
 from Script import script
 from info import *
