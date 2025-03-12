@@ -3,6 +3,7 @@
 # Ask Doubt on telegram @KingVJ01
 
 import os, string, logging, random, asyncio, time, datetime, re, sys, json, base64
+import urllib.parse
 BLOGSPOT_URL = "https://technoji786.blogspot.com/2025/02/codex-channel.html"
 from Script import script
 from pyrogram import Client, filters, enums
