@@ -26,22 +26,6 @@ async def cb_handler(client, query):
     ident, file_id = query.data.split("#")
     await query.answer(url=f"{BLOGSPOT_URL}?url=https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.ERROR)
 lock = asyncio.Lock()
