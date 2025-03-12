@@ -2713,8 +2713,12 @@ async def auto_filter(client, name, msg, reply_msg, ai_search, spoll=False):
                 clean_file_name = re.sub(r'[^\w\s.-]', '', file.file_name)
         
                 # Encode Telegram Link
-                encoded_url = urllib.parse.quote(f"https://telegram.me/{temp.U_NAME}?start=files_{file.file_id}", safe='')
+                encoded_url = urllib.parse.quote(f"https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}", safe='')
 
+                await query.answer(
+                    url=f"{BLOGSPOT_URL}?url={encoded_url}",
+                    cache_time=0
+                )
                 # Generate Final Caption
                 cap += f"<b>📁 <a href='{BLOGSPOT_URL}?url={encoded_url}'>[{get_size(file.file_size)}] {clean_file_name}</a></b>\n\n"
 
