@@ -18,6 +18,7 @@ from database.connections_mdb import mydb, active_connection, all_connections, d
 from database.gfilters_mdb import find_gfilter, get_gfilters, del_allg
 from urllib.parse import quote_plus
 from TechVJ.util.file_properties import get_name, get_hash, get_media_file_size
+import urllib.parse
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.ERROR)
@@ -2704,9 +2705,9 @@ async def auto_filter(client, name, msg, reply_msg, ai_search, spoll=False):
             cap += "<b><u>🍿 Your Movie Files 👇</u></b>\n\n"
             for file in files:
                 telegram_link = f"https://telegram.me/{temp.U_NAME}?start=files_{file['file_id']}"
-                blogspot_redirect = BLOGSPOT_URL + telegram_link  # Blogspot redirect link
-                cap += f"<b>📁 <a href='{blogspot_redirect}'>[{get_size(file['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}\n\n</a></b>"
-
+                encoded_telegram_link = urllib.parse.quote(telegram_link, safe='')  # URL encode
+                blogspot_redirect = BLOGSPOT_URL + encoded_telegram_link
+                
     if imdb and imdb.get('poster'):
         try:
             hehe = await message.reply_photo(photo=imdb.get('poster'), caption=cap, reply_markup=InlineKeyboardMarkup(btn))
