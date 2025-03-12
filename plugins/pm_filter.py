@@ -1372,23 +1372,27 @@ async def cb_handler(client: Client, query: CallbackQuery):
                     await query.answer(f"Hᴇʏ {query.from_user.first_name}, Tʜɪs Is Nᴏᴛ Yᴏᴜʀ Mᴏᴠɪᴇ Rᴇǫᴜᴇsᴛ. Rᴇǫᴜᴇsᴛ Yᴏᴜʀ's !", show_alert=True)
             elif settings['is_shortlink'] and await db.has_premium_access(query.from_user.id):
                 if clicked == typed:
-                    await query.answer(url=f"{BLOGSPOT_URL}?url=https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}")
+                    await query.answer(url = f"{BLOGSPOT_URL}?url={quote(f'https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}', safe='')}"
+                    await query.answer(url=url)
                     return
                 else:
                     await query.answer(f"Hᴇʏ {query.from_user.first_name}, Tʜɪs Is Nᴏᴛ Yᴏᴜʀ Mᴏᴠɪᴇ Rᴇǫᴜᴇsᴛ. Rᴇǫᴜᴇsᴛ Yᴏᴜʀ's !", show_alert=True)
                     
             else:
                 if clicked == typed:
-                    await query.answer(url=f"{BLOGSPOT_URL}?url=https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}")
+                    await query.answer(url = f"{BLOGSPOT_URL}?url={quote(f'https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}', safe='')}"
+                    await query.answer(url=url)
                     return
                 else:
                     await query.answer(f"Hᴇʏ {query.from_user.first_name}, Tʜɪs Is Nᴏᴛ Yᴏᴜʀ Mᴏᴠɪᴇ Rᴇǫᴜᴇsᴛ. Rᴇǫᴜᴇsᴛ Yᴏᴜʀ's !", show_alert=True)
         except UserIsBlocked:
             await query.answer('Uɴʙʟᴏᴄᴋ ᴛʜᴇ ʙᴏᴛ ᴍᴀʜɴ !', show_alert=True)
         except PeerIdInvalid:
-            await query.answer(url=f"{BLOGSPOT_URL}?url=https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}")
+            await query.answer(url = f"{BLOGSPOT_URL}?url={quote(f'https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}', safe='')}"
+            await query.answer(url=url)
         except Exception as e:
-            await query.answer(url=f"{BLOGSPOT_URL}?url=https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}")
+            await query.answer(url = f"{BLOGSPOT_URL}?url={quote(f'https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}', safe='')}"
+            await query.answer(url=url)
             
     elif query.data.startswith("sendfiles"):
         clicked = query.from_user.id
