@@ -22,10 +22,20 @@ import asyncio
 # ✅ YAHAN BLOGSPOT_URL DEFINE KARO
 BLOGSPOT_URL = "https://technoji786.blogspot.com/2025/02/codex-channel.html"
 
+import urllib.parse  # ✅ Import for URL encoding
+
 async def cb_handler(client, query):
     ident, file_id = query.data.split("#")
-    await query.answer(url=f"{BLOGSPOT_URL}?url=https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}")
 
+    # ✅ Properly Encode URL
+    encoded_url = urllib.parse.quote_plus(f"https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}")
+
+    # ✅ Handle Telegram's 64-character limit
+    if len(encoded_url) > 64:
+        await query.answer("Your file is ready, click the button below!", show_alert=True)
+    else:
+        await query.answer(url=f"{BLOGSPOT_URL}?url={encoded_url}")
+        
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.ERROR)
 lock = asyncio.Lock()
