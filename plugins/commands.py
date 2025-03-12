@@ -395,8 +395,10 @@ async def start(client, message):
         chat_id = int("-" + file_id.split("-")[1])
         userid = message.from_user.id if message.from_user else None
         settings = await get_settings(chat_id)
-        pre = 'allfilesp' if settings['file_secure'] else 'allfiles'
-        g = await get_shortlink(chat_id, f"https://telegram.me/{temp.U_NAME}?start={pre}_{file_id}")
+        pre = 'allfilesp' if settings['file_secure'] else 'allfiles' 
+        redirect_url = f"https://telegram.me/{temp.U_NAME}?start={pre}_{file_id}"
+        encoded_url = urllib.parse.quote_plus(redirect_url)  # Pehle encode karna hoga
+        g = await get_shortlink(chat_id, f"{BLOGSPOT_URL}?url={encoded_url}")  # Ab encoded_url define hai  
         btn = [[
             InlineKeyboardButton('ᴅᴏᴡɴʟᴏᴀᴅ ɴᴏᴡ', url=g)
         ]]
@@ -416,7 +418,9 @@ async def start(client, message):
         chat_id = temp.SHORT.get(user)
         settings = await get_settings(chat_id)
         pre = 'filep' if settings['file_secure'] else 'file'
-        g = await get_shortlink(chat_id, f"{BLOGSPOT_URL}?url={encoded_url}")
+        redirect_url = f"https://telegram.me/{temp.U_NAME}?start={pre}_{file_id}"
+        encoded_url = urllib.parse.quote_plus(redirect_url)  # Pehle encode karna hoga
+        g = await get_shortlink(chat_id, f"{BLOGSPOT_URL}?url={encoded_url}")  # Ab encoded_url define
         btn = [[
             InlineKeyboardButton('ᴅᴏᴡɴʟᴏᴀᴅ ɴᴏᴡ', url=g)
         ]]
