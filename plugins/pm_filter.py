@@ -117,13 +117,13 @@ async def next_page(bot, query):
         btn = [
             [
                 InlineKeyboardButton(
-                    text=f"[{get_size(file['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}",
-                    file_id = file["file_id"]
-                    url = f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file_id}')}"
+    text=f"[{get_size(file['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}",
+    url=f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file['file_id']}')}"
                 ),
             ]
             for file in files
         ]
+
         btn.insert(0, 
             [
                 InlineKeyboardButton('ǫᴜᴀʟɪᴛʏ', callback_data=f"qualities#{key}"),
@@ -352,13 +352,12 @@ async def filter_yearss_cb_handler(client: Client, query: CallbackQuery):
     temp.GETALL[key] = files
     settings = await get_settings(message.chat.id)
     pre = 'filep' if settings['file_secure'] else 'file'
-    if settings["button"]:
+    if settings['button']:
         btn = [
             [
                 InlineKeyboardButton(
-                    text=f"[{get_size(file['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}",
-                    file_id = file["file_id"]
-                    url = f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file_id}')}"
+    text=f"[{get_size(file['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}",
+    url=f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file['file_id']}')}"
                 ),
             ]
             for file in files
@@ -520,13 +519,12 @@ async def filter_episodes_cb_handler(client: Client, query: CallbackQuery):
     temp.GETALL[key] = files
     settings = await get_settings(message.chat.id)
     pre = 'filep' if settings['file_secure'] else 'file'
-    if settings["button"]:
+    if settings['button']:
         btn = [
             [
                 InlineKeyboardButton(
-                    text=f"[{get_size(file['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}",
-                    file_id = file["file_id"]
-                    url = f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file_id}')}"
+    text=f"[{get_size(file['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}",
+    url=f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file['file_id']}')}"
                 ),
             ]
             for file in files
@@ -690,13 +688,12 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
     temp.GETALL[key] = files
     settings = await get_settings(message.chat.id)
     pre = 'filep' if settings['file_secure'] else 'file'
-    if settings["button"]:
+    if settings['button']:
         btn = [
             [
                 InlineKeyboardButton(
-                    text=f"[{get_size(file['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}",
-                    file_id = file["file_id"]
-                    url = f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file_id}')}"
+    text=f"[{get_size(file['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}",
+    url=f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file['file_id']}')}"
                 ),
             ]
             for file in files
@@ -889,13 +886,12 @@ async def filter_seasons_cb_handler(client: Client, query: CallbackQuery):
     temp.GETALL[key] = files
     settings = await get_settings(message.chat.id)
     pre = 'filep' if settings['file_secure'] else 'file'
-    if settings["button"]:
+    if settings['button']:
         btn = [
             [
                 InlineKeyboardButton(
-                    text=f"[{get_size(file['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}",
-                    file_id = file["file_id"]
-                    url = f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file_id}')}"
+    text=f"[{get_size(file['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}",
+    url=f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file['file_id']}')}"
                 ),
             ]
             for file in files
@@ -1029,13 +1025,12 @@ async def filter_qualities_cb_handler(client: Client, query: CallbackQuery):
     temp.GETALL[key] = files
     settings = await get_settings(message.chat.id)
     pre = 'filep' if settings['file_secure'] else 'file'
-    if settings["button"]:
+    if settings['button']:
         btn = [
             [
                 InlineKeyboardButton(
-                    text=f"[{get_size(file['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}",
-                    file_id = file["file_id"]
-                    url = f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file_id}')}"
+    text=f"[{get_size(file['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}",
+    url=f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file['file_id']}')}"
                 ),
             ]
             for file in files
@@ -2646,13 +2641,12 @@ async def auto_filter(client, name, msg, reply_msg, ai_search, spoll=False):
     FRESH[key] = search
     temp.GETALL[key] = files
     temp.SHORT[message.from_user.id] = message.chat.id
-    if settings["button"]:
+    if settings['button']:
         btn = [
             [
                 InlineKeyboardButton(
-                    text=f"[{get_size(file['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}",
-                    file_id = file["file_id"]
-                    url = f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file_id}')}"
+    text=f"[{get_size(file['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}",
+    url=f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file['file_id']}')}"
                 ),
             ]
             for file in files
