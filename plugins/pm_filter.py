@@ -1376,11 +1376,13 @@ async def cb_handler(client: Client, query: CallbackQuery):
                     await query.answer(f"Hᴇʏ {query.from_user.first_name}, Tʜɪs Is Nᴏᴛ Yᴏᴜʀ Mᴏᴠɪᴇ Rᴇǫᴜᴇsᴛ. Rᴇǫᴜᴇsᴛ Yᴏᴜʀ's !", show_alert=True)
             elif settings['is_shortlink'] and await db.has_premium_access(query.from_user.id):
                 if clicked == typed:
-                    redirect_url = f"https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}"
-                    encoded_url = urllib.parse.quote_plus(redirect_url)
-                    blog_url = f"{BLOGSPOT_URL}?url={encoded_url}"
-                    await query.answer(url=blog_url)
-                    await query.answer(url=blog_url)
+                    try:
+                        redirect_url = f"https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}"
+                        encoded_url = urllib.parse.quote_plus(redirect_url)
+                        blog_url = f"{BLOGSPOT_URL}?url={encoded_url}"
+                        await query.answer(url=blog_url)
+                    except:
+                        await query.answer("Something went wrong!", show_alert=True)
                     return
                 else:
                     await query.answer(f"Hᴇʏ {query.from_user.first_name}, Tʜɪs Is Nᴏᴛ Yᴏᴜʀ Mᴏᴠɪᴇ Rᴇǫᴜᴇsᴛ. Rᴇǫᴜᴇsᴛ Yᴏᴜʀ's !", show_alert=True)
