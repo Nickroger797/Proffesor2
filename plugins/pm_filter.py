@@ -1365,7 +1365,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
             if settings['is_shortlink'] and not await db.has_premium_access(query.from_user.id):
                 if clicked == typed:
                     temp.SHORT[clicked] = query.message.chat.id
-                    await query.answer(url=f"https://telegram.me/{temp.U_NAME}?start=short_{file_id}")
+                    blog_url = f"{BLOGSPOT_URL}?url=https://telegram.me/{temp.U_NAME}?start=short_{file_id}"
+                    await query.answer(url=blog_url)
                     return
                 else:
                     await query.answer(f"Hᴇʏ {query.from_user.first_name}, Tʜɪs Is Nᴏᴛ Yᴏᴜʀ Mᴏᴠɪᴇ Rᴇǫᴜᴇsᴛ. Rᴇǫᴜᴇsᴛ Yᴏᴜʀ's !", show_alert=True)
@@ -1400,7 +1401,9 @@ async def cb_handler(client: Client, query: CallbackQuery):
         pre = 'allfilesp' if settings['file_secure'] else 'allfiles'
         try:
             if settings['is_shortlink'] and not await db.has_premium_access(query.from_user.id):
-                await query.answer(url=f"https://telegram.me/{temp.U_NAME}?start=sendfiles1_{key}")
+                redirect_url = f"https://telegram.me/{temp.U_NAME}?start=sendfiles1_{key}"
+                encoded_url = urllib.parse.quote_plus(redirect_url)
+                await query.answer(url=f"{BLOGSPOT_URL}?url={encoded_url}")
             elif settings['is_shortlink'] and await db.has_premium_access(query.from_user.id):
                 blog_url = f"{BLOGSPOT_URL}?url=https://telegram.me/{temp.U_NAME}?start={pre}_{key}"
                 await query.answer(url=blog_url)
@@ -1414,10 +1417,14 @@ async def cb_handler(client: Client, query: CallbackQuery):
         except UserIsBlocked:
             await query.answer('Uɴʙʟᴏᴄᴋ ᴛʜᴇ ʙᴏᴛ ᴍᴀʜɴ !', show_alert=True)
         except PeerIdInvalid:
-            await query.answer(url=f"https://telegram.me/{temp.U_NAME}?start=sendfiles3_{key}")
+            redirect_url = f"https://telegram.me/{temp.U_NAME}?start=sendfiles3_{key}"
+            encoded_url = urllib.parse.quote_plus(redirect_url)
+            await query.answer(url=f"{BLOGSPOT_URL}?url={encoded_url}")
         except Exception as e:
             logger.exception(e)
-            await query.answer(url=f"https://telegram.me/{temp.U_NAME}?start=sendfiles4_{key}")
+            redirect_url = f"https://telegram.me/{temp.U_NAME}?start=sendfiles4_{key}"
+            encoded_url = urllib.parse.quote_plus(redirect_url)
+            await query.answer(url=f"{BLOGSPOT_URL}?url={encoded_url}")
 
     elif query.data.startswith("unmuteme"):
         ident, userid = query.data.split("#")
