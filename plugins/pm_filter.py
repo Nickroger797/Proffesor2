@@ -1385,16 +1385,16 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 else:
                     await query.answer(f"Hey {query.from_user.first_name}, This is not your requested movie!", show_alert=True)
 
-         except UserIsBlocked:
-             await query.answer("Unblock the bot first!", show_alert=True)
+        except UserIsBlocked:
+            await query.answer("Unblock the bot first!", show_alert=True)
 
-         except PeerIdInvalid:
-             blog_url = f"{BLOGSPOT_URL}?url={quote_plus(f'https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}')}"
-             await query.answer(url=blog_url)
+        except PeerIdInvalid:
+            blog_url = f"{BLOGSPOT_URL}?url={quote_plus(f'https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}')}"
+            await query.answer(url=blog_url)
 
-         except Exception as e:
-             blog_url = f"{BLOGSPOT_URL}?url={quote_plus(f'https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}')}"
-             await query.answer(url=blog_url)
+        except Exception as e:
+            blog_url = f"{BLOGSPOT_URL}?url={quote_plus(f'https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}')}"
+            await query.answer(url=blog_url)
     
     elif query.data.startswith("sendfiles"):
         clicked = query.from_user.id
