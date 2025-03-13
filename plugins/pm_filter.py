@@ -1362,41 +1362,32 @@ async def cb_handler(client: Client, query: CallbackQuery):
             f_caption = f"{files['file_name']}"
 
         try:
-            # Generate Blogspot Redirection URL
-            blog_url = f"{BLOGSPOT_URL}?url={quote_plus(f'https://t.me/{temp.U_NAME}?start={ident}_{file_id}')}"
-
             if settings['is_shortlink'] and not await db.has_premium_access(query.from_user.id):
-                # Non-Premium Users: Blogspot → Shortlink → File
-                shortlink_url = f"https://t.me/{temp.U_NAME}?start=short_{file_id}"
-
-                keyboard = InlineKeyboardMarkup(
-                    [[InlineKeyboardButton("🔗 Open Blogspot", url=blog_url)]],  # Pehle Blogspot
-                )
-
-                await query.message.edit_reply_markup(reply_markup=keyboard)
-
-                # Blogspot complete hone ke baad shortlink send karo
-                await asyncio.sleep(2)  # Thoda delay tak wait karega
-                await query.message.reply_text(
-                    f"🔗 Get Your Link: [Click Here]({shortlink_url})",
-                    disable_web_page_preview=True,
-                )
-
+                if clicked == typed:
+                    temp.SHORT[clicked] = query.message.chat.id
+                    await query.answer(url=f"https://telegram.me/{temp.U_NAME}?start=short_{file_id}")
+                    return
+                else:
+                    await query.answer(f"Hᴇʏ {query.from_user.first_name}, Tʜɪs Is Nᴏᴛ Yᴏᴜʀ Mᴏᴠɪᴇ Rᴇǫᴜᴇsᴛ. Rᴇǫᴜᴇsᴛ Yᴏᴜʀ's !", show_alert=True)
+            elif settings['is_shortlink'] and await db.has_premium_access(query.from_user.id):
+                if clicked == typed:
+                    await query.answer(url=f"https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}")
+                    return
+                else:
+                    await query.answer(f"Hᴇʏ {query.from_user.first_name}, Tʜɪs Is Nᴏᴛ Yᴏᴜʀ Mᴏᴠɪᴇ Rᴇǫᴜᴇsᴛ. Rᴇǫᴜᴇsᴛ Yᴏᴜʀ's !", show_alert=True)
+                    
             else:
-                # Premium Users: Blogspot → Direct File
-                keyboard = InlineKeyboardMarkup(
-                    [[InlineKeyboardButton("🔗 Open Blogspot", url=blog_url)]]
-                )
-
-                await query.message.edit_reply_markup(reply_markup=keyboard)
-
+                if clicked == typed:
+                    await query.answer(url=f"https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}")
+                    return
+                else:
+                    await query.answer(f"Hᴇʏ {query.from_user.first_name}, Tʜɪs Is Nᴏᴛ Yᴏᴜʀ Mᴏᴠɪᴇ Rᴇǫᴜᴇsᴛ. Rᴇǫᴜᴇsᴛ Yᴏᴜʀ's !", show_alert=True)
         except UserIsBlocked:
             await query.answer('Uɴʙʟᴏᴄᴋ ᴛʜᴇ ʙᴏᴛ ᴍᴀʜɴ !', show_alert=True)
         except PeerIdInvalid:
-            await query.answer('Invalid Peer ID!', show_alert=True)
+            await query.answer(url=f"https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}")
         except Exception as e:
-            print(f"Error: {e}")
-            await query.answer('Something went wrong!', show_alert=True)
+            await query.answer(url=f"https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}")
     
     elif query.data.startswith("sendfiles"):
         clicked = query.from_user.id
