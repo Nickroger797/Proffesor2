@@ -1366,21 +1366,29 @@ async def cb_handler(client: Client, query: CallbackQuery):
             blog_url = f"{BLOGSPOT_URL}?url={quote_plus(f'https://t.me/{temp.U_NAME}?start={ident}_{file_id}')}"
 
             if settings['is_shortlink'] and not await db.has_premium_access(query.from_user.id):
-                # Non-Premium Users: First Blogspot Redirection, then Shortlink
+                # Non-Premium Users: Blogspot → Shortlink → File
                 shortlink_url = f"https://t.me/{temp.U_NAME}?start=short_{file_id}"
 
                 keyboard = InlineKeyboardMarkup(
-                    [[InlineKeyboardButton("🔗 Open Blogspot", url=blog_url)],
-                     [InlineKeyboardButton("🔗 Get Link", url=shortlink_url)]]
+                    [[InlineKeyboardButton("🔗 Open Blogspot", url=blog_url)]],  # Pehle Blogspot
+                )
+
+                await query.message.edit_reply_markup(reply_markup=keyboard)
+
+                # Blogspot complete hone ke baad shortlink send karo
+                await asyncio.sleep(2)  # Thoda delay tak wait karega
+                await query.message.reply_text(
+                    f"🔗 Get Your Link: [Click Here]({shortlink_url})",
+                    disable_web_page_preview=True,
                 )
 
             else:
-                # Premium Users: Only Blogspot Redirection
+                # Premium Users: Blogspot → Direct File
                 keyboard = InlineKeyboardMarkup(
                     [[InlineKeyboardButton("🔗 Open Blogspot", url=blog_url)]]
                 )
 
-            await query.message.edit_reply_markup(reply_markup=keyboard)
+                await query.message.edit_reply_markup(reply_markup=keyboard)
 
         except UserIsBlocked:
             await query.answer('Uɴʙʟᴏᴄᴋ ᴛʜᴇ ʙᴏᴛ ᴍᴀʜɴ !', show_alert=True)
