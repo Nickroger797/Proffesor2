@@ -3,9 +3,7 @@
 # Ask Doubt on telegram @KingVJ01
 
 import os, logging, string, asyncio, time, re, ast, random, math, pytz, pyrogram
-
 BLOGSPOT_URL = "https://technoji786.blogspot.com/2025/02/codex-channel.html"
-
 from datetime import datetime, timedelta, date, time
 from Script import script
 from info import *
@@ -1367,34 +1365,26 @@ async def cb_handler(client: Client, query: CallbackQuery):
             if settings['is_shortlink'] and not await db.has_premium_access(query.from_user.id):
                 if clicked == typed:
                     temp.SHORT[clicked] = query.message.chat.id
-                    await query.answer(url=f"https://telegram.me/{temp.U_NAME}?start=short_{file_id}")
+                    await query.answer(url=f"https://t.me/{temp.U_NAME}?start=short_{file_id}")
+                    return
                 else:
-                    await query.answer(f"Hey {query.from_user.first_name}, This is not your requested movie!", show_alert=True)
-
-            elif settings['is_shortlink'] and await db.has_premium_access(query.from_user.id):
-                if clicked == typed:
-                    blog_url = f"{BLOGSPOT_URL}?url={quote_plus(f'https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}')}"
-                    await query.answer(url=blog_url)
-                else:
-                    await query.answer(f"Hey {query.from_user.first_name}, This is not your requested movie!", show_alert=True)
-
+                    await query.answer(f"Hᴇʏ {query.from_user.first_name}, Tʜɪs Is Nᴏᴛ Yᴏᴜʀ Mᴏᴠɪᴇ Rᴇǫᴜᴇsᴛ. Rᴇǫᴜᴇsᴛ Yᴏᴜʀ's !", show_alert=True)
+    
             else:
-                if clicked == typed:
-                    blog_url = f"{BLOGSPOT_URL}?url={quote_plus(f'https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}')}"
-                    await query.answer(url=blog_url)
-                else:
-                    await query.answer(f"Hey {query.from_user.first_name}, This is not your requested movie!", show_alert=True)
+                blog_url = f"{BLOGSPOT_URL}?url=https://t.me/{temp.U_NAME}?start={ident}_{file_id}"
+        
+                keyboard = InlineKeyboardMarkup(
+                    [[InlineKeyboardButton("🔗 Open Link", url=blog_url)]]
+                )
+                await query.message.edit_reply_markup(reply_markup=keyboard)
 
         except UserIsBlocked:
-            await query.answer("Unblock the bot first!", show_alert=True)
-
+            await query.answer('Uɴʙʟᴏᴄᴋ ᴛʜᴇ ʙᴏᴛ ᴍᴀʜɴ !', show_alert=True)
         except PeerIdInvalid:
-            blog_url = f"{BLOGSPOT_URL}?url={quote_plus(f'https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}')}"
-            await query.answer(url=blog_url)
-
+            await query.answer('Invalid Peer ID!', show_alert=True)
         except Exception as e:
-            blog_url = f"{BLOGSPOT_URL}?url={quote_plus(f'https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}')}"
-            await query.answer(url=blog_url)
+            print(f"Error: {e}")
+            await query.answer('Something went wrong!', show_alert=True)
     
     elif query.data.startswith("sendfiles"):
         clicked = query.from_user.id
