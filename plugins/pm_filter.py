@@ -1362,21 +1362,25 @@ async def cb_handler(client: Client, query: CallbackQuery):
             f_caption = f"{files['file_name']}"
 
         try:
+            # Generate Blogspot Redirection URL
+            blog_url = f"{BLOGSPOT_URL}?url={quote_plus(f'https://t.me/{temp.U_NAME}?start={ident}_{file_id}')}"
+
             if settings['is_shortlink'] and not await db.has_premium_access(query.from_user.id):
-                if clicked == typed:
-                    temp.SHORT[clicked] = query.message.chat.id
-                    await query.answer(url=f"https://t.me/{temp.U_NAME}?start=short_{file_id}")
-                    return
-                else:
-                    await query.answer(f"Hᴇʏ {query.from_user.first_name}, Tʜɪs Is Nᴏᴛ Yᴏᴜʀ Mᴏᴠɪᴇ Rᴇǫᴜᴇsᴛ. Rᴇǫᴜᴇsᴛ Yᴏᴜʀ's !", show_alert=True)
-    
-            else:
-                blog_url = f"{BLOGSPOT_URL}?url=https://t.me/{temp.U_NAME}?start={ident}_{file_id}"
-        
+                # Non-Premium Users: First Blogspot Redirection, then Shortlink
+                shortlink_url = f"https://t.me/{temp.U_NAME}?start=short_{file_id}"
+
                 keyboard = InlineKeyboardMarkup(
-                    [[InlineKeyboardButton("🔗 Open Link", url=blog_url)]]
+                    [[InlineKeyboardButton("🔗 Open Blogspot", url=blog_url)],
+                     [InlineKeyboardButton("🔗 Get Link", url=shortlink_url)]]
                 )
-                await query.message.edit_reply_markup(reply_markup=keyboard)
+
+            else:
+                # Premium Users: Only Blogspot Redirection
+                keyboard = InlineKeyboardMarkup(
+                    [[InlineKeyboardButton("🔗 Open Blogspot", url=blog_url)]]
+                )
+
+            await query.message.edit_reply_markup(reply_markup=keyboard)
 
         except UserIsBlocked:
             await query.answer('Uɴʙʟᴏᴄᴋ ᴛʜᴇ ʙᴏᴛ ᴍᴀʜɴ !', show_alert=True)
