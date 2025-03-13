@@ -1368,33 +1368,34 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 if clicked == typed:
                     temp.SHORT[clicked] = query.message.chat.id
                     await query.answer(url=f"https://telegram.me/{temp.U_NAME}?start=short_{file_id}")
-                    return
-                else:
-                    await query.answer(f"Hᴇʏ {query.from_user.first_name}, Tʜɪs Is Nᴏᴛ Yᴏᴜʀ Mᴏᴠɪᴇ Rᴇǫᴜᴇsᴛ. Rᴇǫᴜᴇsᴛ Yᴏᴜʀ's !", show_alert=True)
+            else:
+                await query.answer(f"Hey {query.from_user.first_name}, This is not your requested movie!", show_alert=True)
+
             elif settings['is_shortlink'] and await db.has_premium_access(query.from_user.id):
                 if clicked == typed:
-                    await query.answer(url = f"{BLOGSPOT_URL}?url={quote_plus(f'https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}')}")
-                    await query.answer(url=url)
-                    return
+                    blog_url = f"{BLOGSPOT_URL}?url={quote_plus(f'https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}')}"
+                    await query.answer(url=blog_url)
                 else:
-                    await query.answer(f"Hᴇʏ {query.from_user.first_name}, Tʜɪs Is Nᴏᴛ Yᴏᴜʀ Mᴏᴠɪᴇ Rᴇǫᴜᴇsᴛ. Rᴇǫᴜᴇsᴛ Yᴏᴜʀ's !", show_alert=True)
-                    
+                    await query.answer(f"Hey {query.from_user.first_name}, This is not your requested movie!", show_alert=True)
+
             else:
                 if clicked == typed:
-                    await query.answer(url = f"{BLOGSPOT_URL}?url={quote_plus(f'https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}')}")
-                    await query.answer(url=url)
-                    return
+                    blog_url = f"{BLOGSPOT_URL}?url={quote_plus(f'https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}')}"
+                    await query.answer(url=blog_url)
                 else:
-                    await query.answer(f"Hᴇʏ {query.from_user.first_name}, Tʜɪs Is Nᴏᴛ Yᴏᴜʀ Mᴏᴠɪᴇ Rᴇǫᴜᴇsᴛ. Rᴇǫᴜᴇsᴛ Yᴏᴜʀ's !", show_alert=True)
-        except UserIsBlocked:
-            await query.answer('Uɴʙʟᴏᴄᴋ ᴛʜᴇ ʙᴏᴛ ᴍᴀʜɴ !', show_alert=True)
-        except PeerIdInvalid:
-            await query.answer(url = f"{BLOGSPOT_URL}?url={quote_plus(f'https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}')}")
-            await query.answer(url=url)
-        except Exception as e:
-            await query.answer(url = f"{BLOGSPOT_URL}?url={quote_plus(f'https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}')}")
-            await query.answer(url=url)
-            
+                    await query.answer(f"Hey {query.from_user.first_name}, This is not your requested movie!", show_alert=True)
+
+         except UserIsBlocked:
+             await query.answer("Unblock the bot first!", show_alert=True)
+
+         except PeerIdInvalid:
+             blog_url = f"{BLOGSPOT_URL}?url={quote_plus(f'https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}')}"
+             await query.answer(url=blog_url)
+
+         except Exception as e:
+             blog_url = f"{BLOGSPOT_URL}?url={quote_plus(f'https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}')}"
+             await query.answer(url=blog_url)
+    
     elif query.data.startswith("sendfiles"):
         clicked = query.from_user.id
         ident, key = query.data.split("#")
