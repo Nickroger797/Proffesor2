@@ -118,10 +118,11 @@ async def next_page(bot, query):
             [
                 InlineKeyboardButton(
     text=f"[{get_size(file['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}",
-    url=f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file['file_id']}')}"
+    url=f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file_id}')}"
                 ),
             ]
             for file in files
+            for file_id in [file["file_id"]]  
         ]
 
         btn.insert(0, 
@@ -357,10 +358,11 @@ async def filter_yearss_cb_handler(client: Client, query: CallbackQuery):
             [
                 InlineKeyboardButton(
     text=f"[{get_size(file['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}",
-    url=f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file['file_id']}')}"
+    url=f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file_id}')}"
                 ),
             ]
             for file in files
+            for file_id in [file["file_id"]]  
         ]
         btn.insert(0, 
             [
@@ -524,10 +526,11 @@ async def filter_episodes_cb_handler(client: Client, query: CallbackQuery):
             [
                 InlineKeyboardButton(
     text=f"[{get_size(file['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}",
-    url=f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file['file_id']}')}"
+    url=f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file_id}')}"
                 ),
             ]
             for file in files
+            for file_id in [file["file_id"]]  
         ]
         btn.insert(0, 
             [
@@ -693,10 +696,11 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
             [
                 InlineKeyboardButton(
     text=f"[{get_size(file['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}",
-    url=f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file['file_id']}')}"
+    url=f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file_id}')}"
                 ),
             ]
             for file in files
+            for file_id in [file["file_id"]]  
         ]
         btn.insert(0, 
             [
@@ -891,10 +895,11 @@ async def filter_seasons_cb_handler(client: Client, query: CallbackQuery):
             [
                 InlineKeyboardButton(
     text=f"[{get_size(file['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}",
-    url=f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file['file_id']}')}"
+    url=f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file_id}')}"
                 ),
             ]
             for file in files
+            for file_id in [file["file_id"]]  
         ]
         btn.insert(0, 
             [
@@ -1030,10 +1035,11 @@ async def filter_qualities_cb_handler(client: Client, query: CallbackQuery):
             [
                 InlineKeyboardButton(
     text=f"[{get_size(file['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}",
-    url=f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file['file_id']}')}"
+    url=f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file_id}')}"
                 ),
             ]
             for file in files
+            for file_id in [file["file_id"]]  
         ]
         btn.insert(0, 
             [
@@ -2646,10 +2652,11 @@ async def auto_filter(client, name, msg, reply_msg, ai_search, spoll=False):
             [
                 InlineKeyboardButton(
     text=f"[{get_size(file['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}",
-    url=f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file['file_id']}')}"
+    url=f"{BLOGSPOT_URL}?url={urllib.parse.quote_plus(f'https://telegram.me/{temp.U_NAME}?start={pre}_{file_id}')}"
                 ),
             ]
             for file in files
+            for file_id in [file["file_id"]]  
         ]
         btn.insert(0, 
             [
