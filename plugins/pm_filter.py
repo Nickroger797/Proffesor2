@@ -1406,18 +1406,18 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 else:
                     await query.answer(f"Hᴇʏ {query.from_user.first_name}, Tʜɪs Is Nᴏᴛ Yᴏᴜʀ Mᴏᴠɪᴇ Rᴇǫᴜᴇsᴛ. Rᴇǫᴜᴇsᴛ Yᴏᴜʀ's !", show_alert=True)
 
-            except UserIsBlocked:
-                await query.answer('Uɴʙʟᴏᴄᴋ ᴛʜᴇ ʙᴏᴛ ᴍᴀʜɴ !', show_alert=True)
-            except PeerIdInvalid:
-                redirect_url = f"https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}"
-                encoded_url = urllib.parse.quote_plus(redirect_url)
-                blog_url = f"{BLOGSPOT_URL}?url={encoded_url}"
-                await query.answer(url=blog_url)
-            except Exception as e:
-                redirect_url = f"https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}"
-                encoded_url = urllib.parse.quote_plus(redirect_url)
-                blog_url = f"{BLOGSPOT_URL}?url={encoded_url}"
-                await query.answer(url=blog_url)
+        except UserIsBlocked:
+            await query.answer('Uɴʙʟᴏᴄᴋ ᴛʜᴇ ʙᴏᴛ ᴍᴀʜɴ !', show_alert=True)
+        except PeerIdInvalid:
+            redirect_url = f"https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}"
+            encoded_url = urllib.parse.quote_plus(redirect_url)
+            blog_url = f"{BLOGSPOT_URL}?url={encoded_url}"
+            await query.answer(url=blog_url)
+        except Exception as e:
+            redirect_url = f"https://telegram.me/{temp.U_NAME}?start={ident}_{file_id}"
+            encoded_url = urllib.parse.quote_plus(redirect_url)
+            blog_url = f"{BLOGSPOT_URL}?url={encoded_url}"
+            await query.answer(url=blog_url)
     
     elif query.data.startswith("sendfiles"):
         clicked = query.from_user.id
